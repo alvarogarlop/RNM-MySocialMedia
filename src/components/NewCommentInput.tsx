@@ -1,6 +1,12 @@
 // NewCommentInput.tsx
 import React, { useState } from "react";
-import { View, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // O usa tu icon library preferida
 
 type NewCommentInputProps = {
@@ -18,23 +24,25 @@ export default function NewCommentInput({ onSend }: NewCommentInputProps) {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.row}>
-        <View style={styles.inputWrapper}>
-          <TextInput
-            style={styles.input}
-            placeholder="Add a comment..."
-            placeholderTextColor="#888"
-            value={comment}
-            onChangeText={setComment}
-          />
-        </View>
+    <KeyboardAvoidingView>
+      <View style={styles.container}>
+        <View style={styles.row}>
+          <View style={styles.inputWrapper}>
+            <TextInput
+              style={styles.input}
+              placeholder="Add a comment..."
+              placeholderTextColor="#888"
+              value={comment}
+              onChangeText={setComment}
+            />
+          </View>
 
-        <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
-          <Ionicons name="send" size={20} color="#666" />
-        </TouchableOpacity>
+          <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
+            <Ionicons name="send" size={20} color="#666" />
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
