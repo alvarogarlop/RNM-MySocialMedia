@@ -36,7 +36,6 @@ export default function NewCommentInput({ postId }: NewCommentInputProps) {
   const handleSend = () => {
     if (comment.trim()) {
       mutate();
-      //setComment("");
     }
   };
 
@@ -54,7 +53,14 @@ export default function NewCommentInput({ postId }: NewCommentInputProps) {
             />
           </View>
 
-          <TouchableOpacity onPress={handleSend} style={styles.sendButton}>
+          <TouchableOpacity
+            onPress={handleSend}
+            style={[
+              styles.sendButton,
+              comment === "" && styles.disabledSendButton,
+            ]}
+            disabled={comment == ""}
+          >
             <Ionicons name="send" size={20} color="#666" />
           </TouchableOpacity>
         </View>
@@ -84,5 +90,8 @@ const styles = StyleSheet.create({
   },
   sendButton: {
     marginLeft: 8,
+  },
+  disabledSendButton: {
+    opacity: 0.4,
   },
 });
