@@ -1,4 +1,3 @@
-// NewCommentInput.tsx
 import React, { useState } from "react";
 import {
   View,
@@ -6,20 +5,38 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // O usa tu icon library preferida
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useAuth } from "@/providers/AuthProvider";
+import { createCommentRequest } from "@/services/commentsService";
 
 type NewCommentInputProps = {
-  onSend?: (comment: string) => void;
+  postId: number;
 };
 
-export default function NewCommentInput({ onSend }: NewCommentInputProps) {
+export default function NewCommentInput({ postId }: NewCommentInputProps) {
   const [comment, setComment] = useState("");
+  const { session } = useAuth();
+
+  const queryClient = useQueryClient();
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      createCommentRequest({ content: comment }, postId, session?.accessToken!),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["comments"] });
+      setComment("");
+    },
+    onError: (error) => {
+      Alert.alert("Failed to create comment");
+    },
+  });
 
   const handleSend = () => {
     if (comment.trim()) {
-      onSend?.(comment.trim());
-      setComment("");
+      mutate();
+      //setComment("");
     }
   };
 

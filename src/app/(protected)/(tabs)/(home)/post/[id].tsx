@@ -43,9 +43,7 @@ export default function PostDetails() {
           right: 0,
         }}
       >
-        <NewCommentInput
-          onSend={(text) => console.log("Comentario enviado: ", text)}
-        />
+        <NewCommentInput postId={Number(id)} />
       </View>
     </>
   );
