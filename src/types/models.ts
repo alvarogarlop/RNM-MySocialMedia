@@ -18,6 +18,7 @@ export type Post = {
 
 export type Comment = {
   id: number;
+  author: User;
   created_at: string;
   user_id: string;
   post_id: number;

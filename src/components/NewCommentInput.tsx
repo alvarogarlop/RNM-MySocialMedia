@@ -8,9 +8,14 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // O usa tu icon library preferida
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { useAuth } from "@/providers/AuthProvider";
-import { createCommentRequest } from "@/services/commentsService";
+import { createCommentRequest, getComments } from "@/services/commentsService";
 
 type NewCommentInputProps = {
   postId: number;
