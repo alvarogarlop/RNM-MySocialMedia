@@ -1,17 +1,10 @@
-import {
-  ActivityIndicator,
-  FlatList,
-  Pressable,
-  Text,
-  useWindowDimensions,
-} from "react-native";
+import { ActivityIndicator, FlatList, Pressable, Text } from "react-native";
 import FeedPostItem from "@/components/FeedPostItem";
 import { Link } from "expo-router";
 import { AntDesign } from "@expo/vector-icons";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useAuth } from "@/providers/AuthProvider";
 import { getPosts } from "@/services/postService";
-import { useRefreshOnFocus } from "@/hooks/tanstack";
 
 export default function FeedScreen() {
   const { session } = useAuth();
