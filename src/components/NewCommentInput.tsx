@@ -8,12 +8,7 @@ import {
   Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // O usa tu icon library preferida
-import {
-  useInfiniteQuery,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "@/providers/AuthProvider";
 import { createCommentRequest, getComments } from "@/services/commentsService";
 
@@ -31,6 +26,7 @@ export default function NewCommentInput({ postId }: NewCommentInputProps) {
       createCommentRequest({ content: comment }, postId, session?.accessToken!),
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["comments"] });
+      queryClient.invalidateQueries({ queryKey: ["posts"] });
       setComment("");
     },
     onError: (error) => {
