@@ -18,6 +18,7 @@ export async function GET(request: Request, { id }: { id: string }) {
         posts.*, 
         row_to_json(users) AS author,
         (SELECT COUNT(*)::INTEGER FROM likes l WHERE l.post_id = posts.id) AS likes_count,
+        (SELECT COUNT(*)::INTEGER FROM comments l WHERE l.post_id = posts.id) AS comments_count,
         EXISTS (
             SELECT 1 FROM likes l 
             WHERE l.post_id = posts.id AND l.user_id = ${token.id}

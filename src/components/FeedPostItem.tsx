@@ -57,7 +57,7 @@ export default function FeedPostItem({ post }: FeedPostItemProps) {
               size={20}
               color="gray"
             />
-            <Text className="text-gray-500">{post.replies_count}</Text>
+            <Text className="text-gray-500">{post.comments_count}</Text>
           </View>
 
           <View className="flex-row items-center gap-1">

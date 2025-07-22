@@ -11,6 +11,7 @@ export type Post = {
   content: string;
   created_at: string;
   likes_count: number;
+  comments_count: number;
   retweets_count: number;
   replies_count: number;
   is_liked?: boolean;
